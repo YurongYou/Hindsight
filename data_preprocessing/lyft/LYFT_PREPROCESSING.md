@@ -94,3 +94,4 @@ python generate_background_samples.py --save_dir LYFT_KITTI_FORMAT/training/bg_s
     --calib_dir LYFT_KITTI_FORMAT/training/calib \
     --trans_mat_dir LYFT_KITTI_FORMAT/training/trans_mat
 ```
+The background samples are stored in `LYFT_KITTI_FORMAT/training/bg_samples`.
