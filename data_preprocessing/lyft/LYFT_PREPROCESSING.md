@@ -1,5 +1,5 @@
 
-## Download and conver to KITTI format
+## Download Lyft dataset and convert it to KITTI format
 Download the Lyft Level 5 AV Dataset from https://level5.lyft.com/dataset/ and decompress it
 into `LYFT_ROOT`. Install Lyft Dataset SDK (https://github.com/lyft/nuscenes-devkit):
 
