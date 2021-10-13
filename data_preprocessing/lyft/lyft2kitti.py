@@ -16,7 +16,8 @@ from scipy.spatial.transform import Rotation as R
 from PIL import Image
 from pyquaternion import Quaternion
 from tqdm import tqdm
-# import pdb
+
+
 CLASS_MAP = {
     "other_vehicle": "Truck",
     "truck": "Truck",
@@ -24,8 +25,8 @@ CLASS_MAP = {
     "bus": "Truck",
     "emergency_vehicle": "Truck",
     "pedestrian": "Pedestrian",
-    "motorcycle": "Misc",
-    "bicycle": "Misc"
+    "motorcycle": "Cyclist",
+    "bicycle": "Cyclist"
 }
 
 
@@ -78,9 +79,9 @@ def project_to_2d(box, p_left, height, width):
 
     # Check that some corners are inside the image.
     corners = np.array(
-        [corner for corner in box.corners().T if corner[2] > 0]).T
-    if len(corners) == 0:
-        return None
+        [corner for corner in box.corners().T]).T
+    # if len(corners) == 0:
+    #     return None
 
     # Project corners that are in front of the camera to 2d to get bbox in pixel coords.
     imcorners = view_points(corners, p_left, normalize=True)[:2]
@@ -89,10 +90,12 @@ def project_to_2d(box, p_left, height, width):
 
     inside = (0 <= bbox[1] < height and 0 < bbox[3] <= height) and (
         0 <= bbox[0] < width and 0 < bbox[2] <= width)
-    valid = (0 <= bbox[1] < height or 0 < bbox[3] <= height) and (
-        0 <= bbox[0] < width or 0 < bbox[2] <= width)
-    if not valid:
-        return None
+    valid = (0 <= bbox[1] < height or 0 < bbox[3] <= height) and \
+        (0 <= bbox[0] < width or 0 < bbox[2] <= width) and \
+            len(np.array(
+            [corner for corner in box.corners().T if corner[2] > 0]).T) > 0
+    # if not valid:
+    #     return None
 
     truncated = valid and not inside
     if truncated:
@@ -107,7 +110,7 @@ def project_to_2d(box, p_left, height, width):
         bbox = _bbox
     else:
         truncated = 0.0
-    return {"bbox": bbox, "truncated": truncated}
+    return {"bbox": bbox, "truncated": truncated, "valid": valid}
 
 
 def form_trans_mat(translation, rotation):
@@ -211,12 +214,13 @@ class KittiConverter:
 
         # Create output folders.
         self.label_folder = self.store_dir.joinpath("label_2")
+        self.full_range_label_folder = self.store_dir.joinpath("label_2_full_range")
         self.calib_folder = self.store_dir.joinpath("calib")
         self.image_folder = self.store_dir.joinpath("image_2")
         self.lidar_folder = self.store_dir.joinpath("velodyne")
         self.oxts_folder = self.store_dir.joinpath("oxts")
         self.l2e_folder = self.store_dir.joinpath("l2e")
-        for folder in [self.label_folder, self.calib_folder, self.image_folder, self.lidar_folder, self.oxts_folder, self.l2e_folder]:
+        for folder in [self.label_folder, self.calib_folder, self.image_folder, self.lidar_folder, self.oxts_folder, self.l2e_folder, self.full_range_label_folder]:
             if not folder.is_dir():
                 folder.mkdir(parents=True)
 
@@ -349,19 +353,19 @@ class KittiConverter:
                 im = Image.open(src_im_path)
                 im.save(dst_im_path, "PNG")
 
-            # Convert lidar.
-            # Note that we are only using a single sweep, instead of the commonly used n sweeps.
-            src_lid_path = self.lyft_ds.data_path.joinpath(filename_lid_full)
-            dst_lid_path = self.lidar_folder.joinpath(f"{sample_name}.bin")
+            # # Convert lidar.
+            # # Note that we are only using a single sweep, instead of the commonly used n sweeps.
+            # src_lid_path = self.lyft_ds.data_path.joinpath(filename_lid_full)
+            # dst_lid_path = self.lidar_folder.joinpath(f"{sample_name}.bin")
 
-            pcl = LidarPointCloud.from_file(Path(src_lid_path))
-            # In KITTI lidar frame.
-            pcl.rotate(self.kitti_to_nu_lidar_inv.rotation_matrix)
-            if rotate:
-                pcl = np.dot(norm_4, pcl.points).T.astype(
-                    np.float32).reshape(-1)
-            with open(dst_lid_path, "w") as lid_file:
-                pcl.points.T.tofile(lid_file)
+            # pcl = LidarPointCloud.from_file(Path(src_lid_path))
+            # # In KITTI lidar frame.
+            # pcl.rotate(self.kitti_to_nu_lidar_inv.rotation_matrix)
+            # if rotate:
+            #     pcl = np.dot(norm_4, pcl.points).T.astype(
+            #         np.float32).reshape(-1)
+            # with open(dst_lid_path, "w") as lid_file:
+            #     pcl.points.T.tofile(lid_file)
 
             # Add to tokens.
             # tokens.append(token_to_write)
@@ -392,11 +396,11 @@ class KittiConverter:
             if convert_labels:
                 # Write label file.
                 label_path = self.label_folder.joinpath(f"{sample_name}.txt")
-                # if label_path.exists():
-                #     print("Skipping existing file: %s" % label_path)
-                #     continue
+                full_range_label_path = self.full_range_label_folder.joinpath(
+                    f"{sample_name}.txt")
 
                 objects = []
+                full_range_objects = []
                 for sample_annotation_token in sample_annotation_tokens:
                     sample_annotation = self.lyft_ds.get("sample_annotation", sample_annotation_token)
 
@@ -428,8 +432,7 @@ class KittiConverter:
 
                     # Project 3d box to 2d box in image, ignore box if it does not fall inside.
                     bbox_2d = project_to_2d(obj["box_cam_kitti"], p_left_kitti, cam_height, cam_width)
-                    if bbox_2d is None:
-                        continue
+
                     obj["bbox_2d"] = bbox_2d["bbox"]
                     obj["truncated"] = bbox_2d["truncated"]
 
@@ -441,12 +444,23 @@ class KittiConverter:
                     obj["alpha"] = -np.arctan2(obj["box_cam_kitti"].center[0], obj["box_cam_kitti"].center[2]) + rot_y
                     obj["depth"] = np.linalg.norm(np.array(obj["box_cam_kitti"].center[:3]))
                     obj["instance_token"] = sample_annotation['instance_token']
-                    objects.append(obj)
+                    if bbox_2d['valid']:
+                        objects.append(obj)
+                    full_range_objects.append(obj)
 
                 objects = postprocessing(objects, cam_height, cam_width)
+                full_range_objects = postprocessing(
+                    full_range_objects, cam_height, cam_width)
 
                 with open(label_path, "w") as label_file:
                     for obj in objects:
+                        # Convert box to output string format.
+                        output = box_to_string(name=obj["detection_name"], box=obj["box_cam_kitti"], bbox_2d=obj["bbox_2d"],
+                                               truncation=obj["truncated"], occlusion=obj["occluded"], alpha=obj["alpha"],
+                                               instance_token=obj['instance_token'])
+                        label_file.write(output + '\n')
+                with open(full_range_label_path, "w") as label_file:
+                    for obj in full_range_objects:
                         # Convert box to output string format.
                         output = box_to_string(name=obj["detection_name"], box=obj["box_cam_kitti"], bbox_2d=obj["bbox_2d"],
                                                truncation=obj["truncated"], occlusion=obj["occluded"], alpha=obj["alpha"],
