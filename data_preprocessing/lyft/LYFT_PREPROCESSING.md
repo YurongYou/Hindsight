@@ -65,7 +65,7 @@ python gather_historical_traversals.py --track_path meta_data/test_track_list.pk
     --data_root LYFT_KITTI_FORMAT --traversal_ptc_save_root LYFT_KITTI_FORMAT/training/combined_lidar \
     --trans_mat_save_root LYFT_KITTI_FORMAT/training/trans_mat
 ```
-Dense traversals <img src="https://render.githubusercontent.com/render/math?math=\{\boldsymbol{S}_l^t\}"> are stored in `LYFT_KITTI_FORMAT/training/combined_lidar` and the relative
+Dense traversals <img src="https://render.githubusercontent.com/render/math?math=\{\boldsymbol{S}_{l_c}^t\}"> are stored in `LYFT_KITTI_FORMAT/training/combined_lidar` and the relative
 transformation from current scan to the traversals are stored in
 `LYFT_KITTI_FORMAT/training/trans_mat`.
 
@@ -79,12 +79,12 @@ python RANSAC.py --calib_dir LYFT_KITTI_FORMAT/training/calib \
 
 ## Generate background sample for detection training
 OpenPCdet typically uses copy-paste object augmentation, which copies objects
-from other scenes into the current scene during training. However, this could result in
+from other scenes into the current scene during training. However, this may result in
 pasting objects into background regions like static bushes. We generate a
 background sample pointcloud, which is from dense traversals and
 with dynamic objects removed.
-The background sample is used only in the training to prevent augmented
-objects pasted into background regions.
+The background sample is used only during training to prevent augmented
+objects being pasted into background regions.
 
 To generate the background sample:
 ```bash
