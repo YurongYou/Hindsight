@@ -7,8 +7,9 @@ into `LYFT_ROOT`. Install Lyft Dataset SDK (https://github.com/lyft/nuscenes-dev
 pip install -U git+https://github.com/lyft/nuscenes-devkit
 ```
 
-We have been experimenting with an earlier version of lyft dataset, which contains
-fewer sequences than the lastest version.
+We have been experimenting with an earlier version of lyft dataset
+(obtained on Aug 16 2019, now this version seems not available from the official website),
+which contains fewer sequences than the lastest version and slightly different localization data.
 The sample tokens of the old version were dumped in
 `data_preprocessing/lyft/lyft_2019_train_sample_tokens.txt`.
 
@@ -79,18 +80,25 @@ python RANSAC.py --calib_dir LYFT_KITTI_FORMAT/training/calib \
 
 ## Generate background sample for detection training
 OpenPCdet typically uses copy-paste object augmentation, which copies objects
-from other scenes into the current scene during training. However, this may result in
-pasting objects into background regions like static bushes. We generate a
-background sample pointcloud, which is from dense traversals and
-with dynamic objects removed.
+from other scenes into the current scene during training. However, this may result in pasting objects into background regions like static bushes,
+which can confuse the model when it is compared with past traversals.
+We thus generate a background sample pointcloud for each scene in the **training set**,
+which is from dense traversals and with dynamic objects removed.
 The background sample is used only during training to prevent augmented
-objects being pasted into background regions.
+objects being pasted into background regions such that the augmentation
+makes sense with the presence of past traversals.
+To have a fair comparison, we apply such augmentation strategy to both base
+detectors and the Hindsight. We observe preventing pasting augmented objects into
+background can have better detection performance on Car objects, a bit worse performance
+on Pedestrian and Cyclist Objects. The trend reported in the paper is still consistent
+when such modification is not applied.
 
 To generate the background sample:
 ```bash
 cd data_processing/lyft
-python generate_background_samples.py --save_dir LYFT_KITTI_FORMAT/training/bg_samples --voxel_size 0.4 \
-    --data_root LYFT_KITTI_FORMAT --label_dir LYFT_KITTI_FORMAT/training/label_2_full_range \
+python generate_background_samples.py --save_dir LYFT_KITTI_FORMAT/training/bg_samples \
+    --voxel_size 0.4 --data_root LYFT_KITTI_FORMAT \
+    --label_dir LYFT_KITTI_FORMAT/training/label_2_full_range \
     --calib_dir LYFT_KITTI_FORMAT/training/calib \
     --trans_mat_dir LYFT_KITTI_FORMAT/training/trans_mat
 ```
