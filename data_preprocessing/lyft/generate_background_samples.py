@@ -2,18 +2,15 @@ import argparse
 import os
 import os.path as osp
 import pickle
-import sys
-import time
 
+import MinkowskiEngine as ME
 import numpy as np
+import scipy
 from pcutils import kitti_util
 from pyquaternion import Quaternion
 from scipy.spatial import Delaunay
-import scipy
-# from scipy.spatial import cKDTree
 from scipy.spatial.transform import Rotation as R
 from tqdm.auto import tqdm
-import MinkowskiEngine as ME
 
 
 def cart2hom(pts_3d):

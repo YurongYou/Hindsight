@@ -1,6 +1,7 @@
 
 ## Download Lyft dataset and convert it to KITTI format
-Download the Lyft Level 5 AV Dataset from https://level5.lyft.com/dataset/ and decompress it
+Download the Lyft Level 5 AV Dataset (Perception)
+from https://level5.lyft.com/dataset/ and decompress it
 into `LYFT_ROOT`. Install Lyft Dataset SDK (https://github.com/lyft/nuscenes-devkit):
 
 ```bash
@@ -46,7 +47,8 @@ data_preprocessing/lyft/meta_data/test_track_list.pkl
 data_preprocessing/lyft/meta_data/valid_test_idx_info.pkl
 data_preprocessing/lyft/meta_data/test_idx.txt # 2917 samples
 ```
-**Note that the `test_idx.txt` is not used, please use `data_preprocessing/lyft/meta_data/time_valid_test_idx.txt` (2274 samples, subset of `test_idx.txt`) as the test set to reproduce the results.**
+**Note that the `test_idx.txt` is not used, please use `data_preprocessing/lyft/meta_data/time_valid_test_idx.txt`
+(2274 samples, subset of `test_idx.txt`) as the test set to reproduce the results.**
 `time_valid_test_idx.txt` contains
 sample ids that have traversals predates the collection time. We use this test set
 in the early development and report the evaluation results on this test set.
@@ -66,7 +68,8 @@ python gather_historical_traversals.py --track_path meta_data/test_track_list.pk
     --data_root LYFT_KITTI_FORMAT --traversal_ptc_save_root LYFT_KITTI_FORMAT/training/combined_lidar \
     --trans_mat_save_root LYFT_KITTI_FORMAT/training/trans_mat
 ```
-Dense traversals <img src="https://render.githubusercontent.com/render/math?math=\{\boldsymbol{S}_{l_c}^t\}"> are stored in `LYFT_KITTI_FORMAT/training/combined_lidar` and the relative
+Dense traversals <img src="https://render.githubusercontent.com/render/math?math=\{\boldsymbol{S}_{l_c}^t\}">
+are stored in `LYFT_KITTI_FORMAT/training/combined_lidar` and the relative
 transformation from current scan to the traversals are stored in
 `LYFT_KITTI_FORMAT/training/trans_mat`.
 
@@ -80,17 +83,18 @@ python RANSAC.py --calib_dir LYFT_KITTI_FORMAT/training/calib \
 
 ## Generate background sample for detection training
 OpenPCdet typically uses copy-paste object augmentation, which copies objects
-from other scenes into the current scene during training. However, this may result in pasting objects into background regions like static bushes,
+from other scenes into the current scene during training. However, this may result
+in pasting objects into background regions like static bushes,
 which can confuse the model when it is compared with past traversals.
 We thus generate a background sample pointcloud for each scene in the **training set**,
 which is from dense traversals and with dynamic objects removed.
 The background sample is used only during training to prevent augmented
 objects being pasted into background regions such that the augmentation
-makes sense with the presence of past traversals.
+is valid with the presence of past traversals.
 To have a fair comparison, we apply such augmentation strategy to both base
 detectors and the Hindsight. We observe preventing pasting augmented objects into
-background can have better detection performance on Car objects, a bit worse performance
-on Pedestrian and Cyclist Objects. The trend reported in the paper is still consistent
+background can result in better detection performance on Car objects, a bit worse performance
+on Pedestrian and Cyclist objects. The trend reported in the paper is still consistent
 when such modification is not applied.
 
 To generate the background sample:

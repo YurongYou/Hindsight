@@ -2,9 +2,8 @@ import argparse
 import os
 
 import numpy as np
-from sklearn.linear_model import RANSACRegressor
-
 import pcutils.kitti_util as utils
+from sklearn.linear_model import RANSACRegressor
 
 
 def extract_ransac(calib_dir, lidar_dir, planes_dir, min_h=1.5, max_h=2, split_file=None):

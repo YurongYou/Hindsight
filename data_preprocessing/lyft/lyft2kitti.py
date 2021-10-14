@@ -1,22 +1,23 @@
 import argparse
+import os
+import pickle
 from pathlib import Path
 from typing import List, Optional
 
-import os
-import pickle
 import fire
 import matplotlib.pyplot as plt
 import numpy as np
 from joblib import Parallel, delayed, parallel_backend
 from lyft_dataset_sdk.lyftdataset import LyftDataset
 from lyft_dataset_sdk.utils.data_classes import LidarPointCloud
-from lyft_dataset_sdk.utils.geometry_utils import BoxVisibility, transform_matrix, view_points
+from lyft_dataset_sdk.utils.geometry_utils import (BoxVisibility,
+                                                   transform_matrix,
+                                                   view_points)
 from lyft_dataset_sdk.utils.kitti import KittiDB
-from scipy.spatial.transform import Rotation as R
 from PIL import Image
 from pyquaternion import Quaternion
+from scipy.spatial.transform import Rotation as R
 from tqdm import tqdm
-
 
 CLASS_MAP = {
     "other_vehicle": "Truck",
@@ -353,22 +354,19 @@ class KittiConverter:
                 im = Image.open(src_im_path)
                 im.save(dst_im_path, "PNG")
 
-            # # Convert lidar.
-            # # Note that we are only using a single sweep, instead of the commonly used n sweeps.
-            # src_lid_path = self.lyft_ds.data_path.joinpath(filename_lid_full)
-            # dst_lid_path = self.lidar_folder.joinpath(f"{sample_name}.bin")
+            # Convert lidar.
+            # Note that we are only using a single sweep, instead of the commonly used n sweeps.
+            src_lid_path = self.lyft_ds.data_path.joinpath(filename_lid_full)
+            dst_lid_path = self.lidar_folder.joinpath(f"{sample_name}.bin")
 
-            # pcl = LidarPointCloud.from_file(Path(src_lid_path))
-            # # In KITTI lidar frame.
-            # pcl.rotate(self.kitti_to_nu_lidar_inv.rotation_matrix)
-            # if rotate:
-            #     pcl = np.dot(norm_4, pcl.points).T.astype(
-            #         np.float32).reshape(-1)
-            # with open(dst_lid_path, "w") as lid_file:
-            #     pcl.points.T.tofile(lid_file)
-
-            # Add to tokens.
-            # tokens.append(token_to_write)
+            pcl = LidarPointCloud.from_file(Path(src_lid_path))
+            # In KITTI lidar frame.
+            pcl.rotate(self.kitti_to_nu_lidar_inv.rotation_matrix)
+            if rotate:
+                pcl = np.dot(norm_4, pcl.points).T.astype(
+                    np.float32).reshape(-1)
+            with open(dst_lid_path, "w") as lid_file:
+                pcl.points.T.tofile(lid_file)
 
             # Create calibration file.
             kitti_transforms = dict()

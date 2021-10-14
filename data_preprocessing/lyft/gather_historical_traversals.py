@@ -2,11 +2,11 @@ import argparse
 import os
 import os.path as osp
 import pickle
-from tqdm.auto import tqdm
 
 import numpy as np
 from pyquaternion import Quaternion
 from scipy.spatial.transform import Rotation as R
+from tqdm.auto import tqdm
 
 
 def cart2hom(pts_3d):
