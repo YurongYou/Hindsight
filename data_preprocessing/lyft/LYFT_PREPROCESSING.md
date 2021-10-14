@@ -107,3 +107,19 @@ python generate_background_samples.py --save_dir LYFT_KITTI_FORMAT/training/bg_s
     --trans_mat_dir LYFT_KITTI_FORMAT/training/trans_mat
 ```
 The background samples are stored in `LYFT_KITTI_FORMAT/training/bg_samples`.
+
+## Setup for detection training
+
+Make dir `downstream/OpenPCDet/data/lyft`, create soft links to following files:
+```plaintext
+├── ImageSets
+│   ├── train.txt -> <project_root>/data_preprocessing/lyft/meta_data/train_idx.txt
+│   └── val.txt -> <project_root>/data_preprocessing/lyft/meta_data/time_valid_test_idx.txt
+├── testing
+└── training -> LYFT_KITTI_FORMAT/training
+```
+After [installing OpenPCDet](../../downstream/OpenPCDet/docs/INSTALL.md), run
+```bash
+cd downstream/OpenPCDet/tools
+python -m pcdet.datasets.kitti.kitti_dataset create_kitti_infos tools/cfgs/dataset_configs/lyft_dataset.yaml
+```
