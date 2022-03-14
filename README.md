@@ -1,6 +1,18 @@
 # Hindsight is 20/20: Leveraging Past Traversals to Aid 3D Perception
 
-This is the official code release for paper **Hindsight is 20/20: Leveraging Past Traversals to Aid 3D Perception**.
+This is the official code release for paper **Hindsight is 20/20: Leveraging Past Traversals to Aid 3D Perception** (ICLR 2022).
+
+### Citation
+```
+@inproceedings{you2022hindsight,
+  title = {Hindsight is 20/20: Leveraging Past Traversals to Aid 3D Perception},
+  author = {You, Yurong and Luo, Katie Z and Chen, Xiangyu and Chen, Junan and Chao, Wei-Lun and Sun, Wen and Hariharan, Bharath and Campbell, Mark and Weinberger, Kilian Q.},
+  booktitle = {Proceedings of the International Conference on Learning Representations (ICLR)},
+  year = {2022},
+  month = apr,
+  url = {https://openreview.net/forum?id=qsZoGvFiJn1}
+}
+```
 
 ## Environment
 ```bash
@@ -45,3 +57,9 @@ OMP_NUM_THREADS=6 bash scripts/dist_test.sh <num_of_gpus> --cfg_file <cfg> --ckp
 ### Checkpoints
 
 ## License
+
+
+## Acknowledgement
+This work uses [OpenPCDet](https://github.com/open-mmlab/OpenPCDet), [MinkowskiEngine
+](https://github.com/NVIDIA/MinkowskiEngine) and [spconv](https://github.com/traveller59/spconv).
+We thank them for open-sourcing excellent libraries for 3D understanding tasks.
