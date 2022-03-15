@@ -16,7 +16,7 @@ INFO_PATH: {
 LOAD_HISTORY:
   DATA_PATH: ../data/lyft/training/combined_lidar
   LIMIT_NUM: 5
-  TRANS_MAT_PATH: ../data/lyft/training/trans_mats
+  TRANS_MAT_PATH: ../data/lyft/training/trans_mat
   VOXEL_SIZE: -1
   FORWARD_ONLY: True
   CACHE_ROOT: /scratch/p4_cache/
