@@ -20,13 +20,6 @@ class DataAugmentor(object):
             else augmentor_configs.AUG_CONFIG_LIST
 
         augmentation_names = [cur_cfg.NAME for cur_cfg in aug_config_list]
-        # if 'point_quantize' in augmentation_names:
-        #     if 'gt_sampling' in augmentation_names:
-        #         assert augmentation_names.index(
-        #             'gt_sampling') < augmentation_names.index('point_quantize')
-        #     for i in range(len(augmentation_names)):
-        #         if 'random' in augmentation_names[i]:
-        #             assert i > augmentation_names.index('point_quantize')
         self.augmentation_names = augmentation_names
 
         for cur_cfg in aug_config_list:

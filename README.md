@@ -4,6 +4,8 @@ This is the official code release for
 
 [**Hindsight is 20/20: Leveraging Past Traversals to Aid 3D Perception** (ICLR 2022)](https://openreview.net/forum?id=qsZoGvFiJn1).
 
+by [Yurong You](https://yurongyou.com/), [Katie Z Luo](https://www.cs.cornell.edu/~katieluo/), [Xiangyu Chen](https://www.cs.cornell.edu/~xchen/), Junan Chen, [Wei-Lun Chao](https://sites.google.com/view/wei-lun-harry-chao), [Wen Sun](https://wensun.github.io/), [Bharath Hariharan](http://home.bharathh.info/), [Mark Campbell](https://research.cornell.edu/researchers/mark-campbell), and [Kilian Q. Weinberger](https://www.cs.cornell.edu/~kilian/)
+
 ![Figure](figures/diagram.jpg)
 
 ### Abstract
@@ -84,7 +86,9 @@ OMP_NUM_THREADS=6 bash scripts/dist_test.sh <num_of_gpus> --cfg_file <cfg> --ckp
 | PointRCNN |  | [cfg](downstream/OpenPCDet/tools/cfgs/nuscenes_boston_models/pointrcnn.yaml) |
 | PointRCNN+Hindsight |  | [cfg](downstream/OpenPCDet/tools/cfgs/nuscenes_boston_models/pointrcnn_hindsight.yaml) |
 ## License
-
+This project is under MIT License.
+We use [OpenPCDet](https://github.com/open-mmlab/OpenPCDet) and [spconv](https://github.com/traveller59/spconv) in this project and they are under Apache-2.0 License.
+We list our changes [here](CHANGES.md).
 
 ## Acknowledgement
 This work uses [OpenPCDet](https://github.com/open-mmlab/OpenPCDet), [MinkowskiEngine
