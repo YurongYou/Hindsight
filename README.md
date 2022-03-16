@@ -6,6 +6,8 @@ This is the official code release for
 
 by [Yurong You](https://yurongyou.com/), [Katie Z Luo](https://www.cs.cornell.edu/~katieluo/), [Xiangyu Chen](https://www.cs.cornell.edu/~xchen/), Junan Chen, [Wei-Lun Chao](https://sites.google.com/view/wei-lun-harry-chao), [Wen Sun](https://wensun.github.io/), [Bharath Hariharan](http://home.bharathh.info/), [Mark Campbell](https://research.cornell.edu/researchers/mark-campbell), and [Kilian Q. Weinberger](https://www.cs.cornell.edu/~kilian/)
 
+[Video](https://www.youtube.com/watch?v=x_8CUoY8Dxs) | [Paper](https://openreview.net/pdf?id=qsZoGvFiJn1)
+
 ![Figure](figures/diagram.jpg)
 
 ### Abstract
