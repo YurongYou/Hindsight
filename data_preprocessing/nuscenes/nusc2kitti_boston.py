@@ -1,3 +1,4 @@
+# modified from https://github.com/cxy1997/3D_adapt_auto_driving/blob/master/convert/nusc2kitti.py
 import os
 import json
 from typing import List, Dict, Any
@@ -22,8 +23,6 @@ from nuscenes.utils.kitti import KittiDB
 from nuscenes.eval.detection.utils import category_to_detection_name
 
 from typing import cast
-
-import pdb
 
 
 def find_closest_integer_in_ref_arr(query_int: int, ref_arr: np.ndarray):
@@ -336,13 +335,9 @@ class KittiConverter:
         # # Write label file.
         if self.convert_labels:
             label_path = os.path.join(self.label_folder, sample_name + '.txt')
-            # if not os.path.exists(label_path):
-            #     touch(label_path)
             if os.path.exists(label_path):
                 print('Skipping existing file: %s' % label_path)
                 return
-            # else:
-            #     print('Writing file: %s' % label_path)
 
             objects = []
             for sample_annotation_token in sample_annotation_tokens:
