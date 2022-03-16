@@ -58,14 +58,14 @@ We observe a similar trend on `data_preprocessing/lyft/meta_data/test_idx.txt`.
 ## Gather dense historical traversals
 
 ```bash
-cd data_processing/lyft
-python gather_historical_traversals.py --track_path meta_data/train_track_list.pkl \
-    --idx_info meta_data/valid_train_idx_info.pkl --idx_list meta_data/train_idx.txt \
+cd data_processing
+python gather_historical_traversals.py --track_path lyft/meta_data/train_track_list.pkl \
+    --idx_info lyft/meta_data/valid_train_idx_info.pkl --idx_list lyft/meta_data/train_idx.txt \
     --data_root LYFT_KITTI_FORMAT --traversal_ptc_save_root LYFT_KITTI_FORMAT/training/combined_lidar \
     --trans_mat_save_root LYFT_KITTI_FORMAT/training/trans_mat
 
-python gather_historical_traversals.py --track_path meta_data/test_track_list.pkl \
-    --idx_info meta_data/valid_test_idx_info.pkl --idx_list meta_data/time_valid_test_idx.txt \
+python gather_historical_traversals.py --track_path lyft/meta_data/test_track_list.pkl \
+    --idx_info lyft/meta_data/valid_test_idx_info.pkl --idx_list lyft/meta_data/time_valid_test_idx.txt \
     --data_root LYFT_KITTI_FORMAT --traversal_ptc_save_root LYFT_KITTI_FORMAT/training/combined_lidar \
     --trans_mat_save_root LYFT_KITTI_FORMAT/training/trans_mat
 ```
@@ -76,7 +76,7 @@ transformation from current scan to the traversals are stored in
 
 ## Generate ground planes for detection training
 ```bash
-cd data_processing/lyft
+cd data_processing
 python RANSAC.py --calib_dir LYFT_KITTI_FORMAT/training/calib \
     --lidar_dir LYFT_KITTI_FORMAT/training/velodyne \
     --planes_dir LYFT_KITTI_FORMAT/training/planes --min_h 1.5 --max_h 2.5
@@ -100,12 +100,15 @@ when such modification is not applied.
 
 To generate the background sample:
 ```bash
-cd data_processing/lyft
+cd data_processing
 python generate_background_samples.py --save_dir LYFT_KITTI_FORMAT/training/bg_samples \
     --voxel_size 0.4 --data_root LYFT_KITTI_FORMAT \
     --label_dir LYFT_KITTI_FORMAT/training/label_2_full_range \
     --calib_dir LYFT_KITTI_FORMAT/training/calib \
-    --trans_mat_dir LYFT_KITTI_FORMAT/training/trans_mat
+    --trans_mat_dir LYFT_KITTI_FORMAT/training/trans_mat \
+    --track_path lyft/meta_data/train_track_list.pkl \
+    --idx_info lyft/meta_data/valid_train_idx_info.pkl \
+    --idx_list lyft/meta_data/train_idx.txt
 ```
 The background samples are stored in `LYFT_KITTI_FORMAT/training/bg_samples`.
 

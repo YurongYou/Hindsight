@@ -62,7 +62,7 @@ OMP_NUM_THREADS=6 bash scripts/dist_train.sh 4 --cfg_file <cfg> --merge_all_iter
 ### Evaluation:
 ```bash
 cd downstream/OpenPCDet/tools
-OMP_NUM_THREADS=6 bash scripts/dist_test.sh <num_of_gpus> --cfg_file <cfg> --ckpt <ckpt_path>
+OMP_NUM_THREADS=6 bash scripts/dist_test.sh 4 --cfg_file <cfg> --ckpt <ckpt_path>
 ```
 
 ## Checkpoints
@@ -81,16 +81,20 @@ OMP_NUM_THREADS=6 bash scripts/dist_test.sh <num_of_gpus> --cfg_file <cfg> --ckp
 ### nuScenes experiments
 | Model | Checkpoint  | Config file |
 | ----- | :----: | :----: |
-| PointPillars |  | [cfg](downstream/OpenPCDet/tools/cfgs/nuscenes_boston_models/pointpillar.yaml) |
-| PointPillars+Hindsight |  | [cfg](downstream/OpenPCDet/tools/cfgs/nuscenes_boston_models/pointpillar_hindsight.yaml) |
-| PointRCNN |  | [cfg](downstream/OpenPCDet/tools/cfgs/nuscenes_boston_models/pointrcnn.yaml) |
-| PointRCNN+Hindsight |  | [cfg](downstream/OpenPCDet/tools/cfgs/nuscenes_boston_models/pointrcnn_hindsight.yaml) |
+| PointPillars | [link](https://drive.google.com/file/d/1Cn-YVsAwGn91vVaXf2LjOqL0KJ453v4u/view?usp=sharing) | [cfg](downstream/OpenPCDet/tools/cfgs/nuscenes_boston_models/pointpillar.yaml) |
+| PointPillars+Hindsight | [link](https://drive.google.com/file/d/1pIUvdqOeS5OOZkseAyPUnlbo8T8BGqiB/view?usp=sharing) | [cfg](downstream/OpenPCDet/tools/cfgs/nuscenes_boston_models/pointpillar_hindsight.yaml) |
+| PointRCNN | [link](https://drive.google.com/file/d/1HUGV8zCiUfg6S_xXeOlLO-JfFNMaVzc9/view?usp=sharing) | [cfg](downstream/OpenPCDet/tools/cfgs/nuscenes_boston_models/pointrcnn.yaml) |
+| PointRCNN+Hindsight | [link](https://drive.google.com/file/d/1xUhCYpsZqt_VJaQF0YUcNFFTbpgNCHwE/view?usp=sharing) | [cfg](downstream/OpenPCDet/tools/cfgs/nuscenes_boston_models/pointrcnn_hindsight.yaml) |
 ## License
-This project is under MIT License.
-We use [OpenPCDet](https://github.com/open-mmlab/OpenPCDet) and [spconv](https://github.com/traveller59/spconv) in this project and they are under Apache-2.0 License.
+This project is under the MIT License.
+We use [OpenPCDet](https://github.com/open-mmlab/OpenPCDet) and [spconv](https://github.com/traveller59/spconv) in this project and they are under the Apache-2.0 License.
 We list our changes [here](CHANGES.md).
+
+## Contact
+Please open an issue if you have any questions about using this repo.
 
 ## Acknowledgement
 This work uses [OpenPCDet](https://github.com/open-mmlab/OpenPCDet), [MinkowskiEngine
 ](https://github.com/NVIDIA/MinkowskiEngine) and [spconv](https://github.com/traveller59/spconv).
 We thank them for open-sourcing excellent libraries for 3D understanding tasks.
+We also use the scripts from [3D_adapt_auto_driving](https://github.com/cxy1997/3D_adapt_auto_driving) for converting Lyft and nuScenes dataset into KITTI format.

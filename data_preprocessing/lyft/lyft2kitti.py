@@ -1,3 +1,4 @@
+# modify from https://github.com/cxy1997/3D_adapt_auto_driving/blob/master/convert/lyft2kitti.py
 import argparse
 import os
 import pickle
