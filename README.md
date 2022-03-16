@@ -2,7 +2,7 @@
 
 This is the official code release for
 
-[**Hindsight is 20/20: Leveraging Past Traversals to Aid 3D Perception** (ICLR 2022)](https://openreview.net/forum?id=qsZoGvFiJn1).
+[[ICLR 2022] **Hindsight is 20/20: Leveraging Past Traversals to Aid 3D Perception**](https://openreview.net/forum?id=qsZoGvFiJn1).
 
 by [Yurong You](https://yurongyou.com/), [Katie Z Luo](https://www.cs.cornell.edu/~katieluo/), [Xiangyu Chen](https://www.cs.cornell.edu/~xchen/), Junan Chen, [Wei-Lun Chao](https://sites.google.com/view/wei-lun-harry-chao), [Wen Sun](https://wensun.github.io/), [Bharath Hariharan](http://home.bharathh.info/), [Mark Campbell](https://research.cornell.edu/researchers/mark-campbell), and [Kilian Q. Weinberger](https://www.cs.cornell.edu/~kilian/)
 
