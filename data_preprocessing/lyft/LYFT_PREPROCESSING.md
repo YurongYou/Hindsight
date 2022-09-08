@@ -4,6 +4,8 @@ Download the Lyft Level 5 AV Dataset (Perception)
 from https://level5.lyft.com/dataset/ and decompress it
 into `LYFT_ROOT`. Install Lyft Dataset SDK (https://github.com/lyft/nuscenes-devkit):
 
+**[Update]**: please follow [this issue](https://github.com/YurongYou/Hindsight/issues/2) to resolve one point cloud file corruption issue(`train/train_lidar/host-a011_lidar1_1233090652702363606.bin`).
+
 ```bash
 pip install -U git+https://github.com/lyft/nuscenes-devkit
 ```
