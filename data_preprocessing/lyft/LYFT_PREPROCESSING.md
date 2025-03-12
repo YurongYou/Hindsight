@@ -6,6 +6,8 @@ into `LYFT_ROOT`. Install Lyft Dataset SDK (https://github.com/lyft/nuscenes-dev
 
 **[Update]**: please follow [this issue](https://github.com/YurongYou/Hindsight/issues/2) to resolve one point cloud file corruption issue(`train/train_lidar/host-a011_lidar1_1233090652702363606.bin`).
 
+**[Update]**: The Lyft L5 dataset has moved! Please download from the official site: https://woven.toyota/en/perception-dataset.
+
 ```bash
 pip install -U git+https://github.com/lyft/nuscenes-devkit
 ```
