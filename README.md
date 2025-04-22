@@ -71,22 +71,22 @@ OMP_NUM_THREADS=6 bash scripts/dist_test.sh 4 --cfg_file <cfg> --ckpt <ckpt_path
 ### Lyft experiments
 | Model | Checkpoint  | Config file |
 | ----- | :----: | :----: |
-| PointPillars | [link](https://drive.google.com/file/d/1N1N0wKeSGtvwBad3iNHgbTGwyFU0q36z/view?usp=sharing) | [cfg](downstream/OpenPCDet/tools/cfgs/lyft_models/pointpillar.yaml) |
-| PointPillars+Hindsight | [link](https://drive.google.com/file/d/1piZuMhSoG2Ea3JPzXwg4VVfGCLFD3NtV/view?usp=sharing) | [cfg](downstream/OpenPCDet/tools/cfgs/lyft_models/pointpillar_hindsight.yaml) |
-| SECOND | [link](https://drive.google.com/file/d/1gnmUdc99EykRq1KOOI-bgXApc99T-MvW/view?usp=sharing) | [cfg](downstream/OpenPCDet/tools/cfgs/lyft_models/second_multihead.yaml) |
-| SECOND+Hindsight | [link](https://drive.google.com/file/d/1EG4oZm9d-hvGLKMpQ4zQZgUbcZsFXuxR/view?usp=sharing) | [cfg](downstream/OpenPCDet/tools/cfgs/lyft_models/second_multihead_hindsight.yaml) |
-| PointRCNN | [link](https://drive.google.com/file/d/1UT5QYoG0X0dpSM6Bs4B6NXdwiHSTkApj/view?usp=sharing) | [cfg](downstream/OpenPCDet/tools/cfgs/lyft_models/pointrcnn.yaml) |
-| PointRCNN+Hindsight | [link](https://drive.google.com/file/d/1_8IgExDAd80rQchVok1RLPjv4t29O51X/view?usp=sharing) | [cfg](downstream/OpenPCDet/tools/cfgs/lyft_models/pointrcnn_hindsight.yaml) |
-| PV-RCNN | [link](https://drive.google.com/file/d/11EZuEaLc4J618kwXqte3uBw4BXhYvwXA/view?usp=sharing) | [cfg](downstream/OpenPCDet/tools/cfgs/lyft_models/pv_rcnn.yaml) |
-| PV-RCNN+Hindsight | [link](https://drive.google.com/file/d/1WgB42dYGawQUrPLeejSNOc-ddc-iFn9H/view?usp=sharing) | [cfg](downstream/OpenPCDet/tools/cfgs/lyft_models/pv_rcnn_hindsight.yaml) |
+| PointPillars | [link](https://drive.google.com/file/d/1zFzAvGcK_aRfcsATkXmsya9ijoysA2jM/view?usp=drive_link) | [cfg](downstream/OpenPCDet/tools/cfgs/lyft_models/pointpillar.yaml) |
+| PointPillars+Hindsight | [link](https://drive.google.com/file/d/1lFXo03qXYMhZMHj4CMn_ucje1uv4T7tj/view?usp=drive_link) | [cfg](downstream/OpenPCDet/tools/cfgs/lyft_models/pointpillar_hindsight.yaml) |
+| SECOND | [link](https://drive.google.com/file/d/1kjffho1yIp41GvVXGZA7_FZqZWQ3CdGN/view?usp=drive_link) | [cfg](downstream/OpenPCDet/tools/cfgs/lyft_models/second_multihead.yaml) |
+| SECOND+Hindsight | [link](https://drive.google.com/file/d/1ZhgoeBOfPhkNyekJywEP3cwUlvHBpP0a/view?usp=drive_link) | [cfg](downstream/OpenPCDet/tools/cfgs/lyft_models/second_multihead_hindsight.yaml) |
+| PointRCNN | [link](https://drive.google.com/file/d/1lUhMKLEkQA2GeSaoFaXfqTM6vWEOLE6g/view?usp=drive_link) | [cfg](downstream/OpenPCDet/tools/cfgs/lyft_models/pointrcnn.yaml) |
+| PointRCNN+Hindsight | [link](https://drive.google.com/file/d/1fHT5OHqY9Uno-JYzr9zwpkGOOYhowDwe/view?usp=drive_link) | [cfg](downstream/OpenPCDet/tools/cfgs/lyft_models/pointrcnn_hindsight.yaml) |
+| PV-RCNN | [link](https://drive.google.com/file/d/13BqgWt-mUk3tc9iIfsBtMAM4SpW-gDkp/view?usp=drive_link) | [cfg](downstream/OpenPCDet/tools/cfgs/lyft_models/pv_rcnn.yaml) |
+| PV-RCNN+Hindsight | [link](https://drive.google.com/file/d/14JAKA6GumcW4b-QR895d7983wfwH53ou/view?usp=drive_link) | [cfg](downstream/OpenPCDet/tools/cfgs/lyft_models/pv_rcnn_hindsight.yaml) |
 
 ### nuScenes experiments
 | Model | Checkpoint  | Config file |
 | ----- | :----: | :----: |
-| PointPillars | [link](https://drive.google.com/file/d/1Cn-YVsAwGn91vVaXf2LjOqL0KJ453v4u/view?usp=sharing) | [cfg](downstream/OpenPCDet/tools/cfgs/nuscenes_boston_models/pointpillar.yaml) |
-| PointPillars+Hindsight | [link](https://drive.google.com/file/d/1pIUvdqOeS5OOZkseAyPUnlbo8T8BGqiB/view?usp=sharing) | [cfg](downstream/OpenPCDet/tools/cfgs/nuscenes_boston_models/pointpillar_hindsight.yaml) |
-| PointRCNN | [link](https://drive.google.com/file/d/1HUGV8zCiUfg6S_xXeOlLO-JfFNMaVzc9/view?usp=sharing) | [cfg](downstream/OpenPCDet/tools/cfgs/nuscenes_boston_models/pointrcnn.yaml) |
-| PointRCNN+Hindsight | [link](https://drive.google.com/file/d/1xUhCYpsZqt_VJaQF0YUcNFFTbpgNCHwE/view?usp=sharing) | [cfg](downstream/OpenPCDet/tools/cfgs/nuscenes_boston_models/pointrcnn_hindsight.yaml) |
+| PointPillars | [link](https://drive.google.com/file/d/1-r-qJ8SzClXPZMdyYSJDeLw0cN59u6e6/view?usp=drive_link) | [cfg](downstream/OpenPCDet/tools/cfgs/nuscenes_boston_models/pointpillar.yaml) |
+| PointPillars+Hindsight | [link](https://drive.google.com/file/d/1tbfsOsMC5tg7qkYydt1DX_tKeJ9fVTb8/view?usp=drive_link) | [cfg](downstream/OpenPCDet/tools/cfgs/nuscenes_boston_models/pointpillar_hindsight.yaml) |
+| PointRCNN | [link](https://drive.google.com/file/d/1q5yZNZ8-7d2CYOQPpITTCU7GwQMITMsq/view?usp=drive_link) | [cfg](downstream/OpenPCDet/tools/cfgs/nuscenes_boston_models/pointrcnn.yaml) |
+| PointRCNN+Hindsight | [link](https://drive.google.com/file/d/1iiG1J5g-uRwkwfqhxsQgQvtdaeOGpKIY/view?usp=drive_link) | [cfg](downstream/OpenPCDet/tools/cfgs/nuscenes_boston_models/pointrcnn_hindsight.yaml) |
 ## License
 This project is under the MIT License.
 We use [OpenPCDet](https://github.com/open-mmlab/OpenPCDet) and [spconv](https://github.com/traveller59/spconv) in this project and they are under the Apache-2.0 License.
